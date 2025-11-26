@@ -5,13 +5,13 @@ btn.addEventListener('click', (e) =>{
     e.preventDefault()
 
     let nome = document.getElementById('nome').value
-    let email = document.getElementById('email').value
-    let telefone = document.getElementById('telefone').value
-    let cpf = document.getElementById('cpf').value
-    let identidade = document.getElementById('identidade').value
-    let senha = document.getElementById('senha').value
+    let descricao = document.getElementById('descricao').value
+    let modelo = document.getElementById('modelo').value
+    let preco = document.getElementById('preco').value
+    let imagem_url = document.getElementById('imagem_url').value
+    let ativo = document.getElementById('ativo').value
 
-    if(!nome || !email || !telefone || !cpf || !senha){
+    if(!nome || !modelo || !preco || !ativo){
 
         res.innerHTML = `Preencha todos os campos para prosseguir.`
         res.style.color = 'red'
@@ -21,19 +21,21 @@ btn.addEventListener('click', (e) =>{
 
     const valores = {
         nome: nome,
-        email: email,
-        telefone: telefone,
-        cpf: cpf,
-        identidade: identidade,
-        senha: senha
+        descricao: descricao,
+        modelo: modelo,
+        preco: preco,
+        imagem_url: imagem_url,
+        ativo: ativo
     }
 
     console.log(valores)
 
-    fetch(`http://localhost:3000/usuario`, {
+    const token = sessionStorage.getItem('token')
+    fetch(`http://localhost:3000/produto`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
         },  
         body: JSON.stringify(valores)
     })

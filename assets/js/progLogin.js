@@ -70,7 +70,7 @@ btn.addEventListener('click', (e) => {
             // Redirecionar conforme tipo
             if(dados.usuario.tipo === 'ADMIN') {
 
-                location.href = './pages/produtoCadastrar.html'
+                location.href = './pages/produto.html'
             }else{
 
                 location.href = './pages/loja.html'
