@@ -110,6 +110,8 @@ body{
 }#produtos{
     width:100%;
     min-height:910px
+}#btnLogout{
+    margin-top:7px;
 }
 
 /* --------------------------- STYLE FONTES --------------------------- */
