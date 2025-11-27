@@ -1,6 +1,15 @@
+const btn = document.getElementById('btn')
+const btnClear = document.getElementById('btnClear')
 const btnLogout = document.getElementById('btnLogout')
+
 let resProdutos = document.getElementById('produtos')
-let produtos = []
+let produtoAll = []
+
+btnLogout.addEventListener('click', () =>{
+    
+    sessionStorage.clear()
+    location.href = '../index.html' 
+})
 
 window.addEventListener('DOMContentLoaded', () =>{
 
@@ -13,6 +22,7 @@ window.addEventListener('DOMContentLoaded', () =>{
     resNomeUser.innerHTML = nomeUser
     resTipo.innerHTML = tipo
 
+    
     const token = sessionStorage.getItem('token')
     fetch(`http://localhost:3000/produto`, {
         method: 'GET',
@@ -24,13 +34,14 @@ window.addEventListener('DOMContentLoaded', () =>{
     .then(resp => resp.json())
     .then(dados =>{
 
-        produtos.innerHTML = ''
+        produtoAll = dados
+
+        resProdutos.innerHTML = ''
         dados.forEach(dad =>{
             
-            produtos.push(dad)
             if(dad.ativo === true){
 
-                produtos.innerHTML += 
+                resProdutos.innerHTML += 
                 `
                 <article class="produto">
 
@@ -52,27 +63,57 @@ window.addEventListener('DOMContentLoaded', () =>{
         })
     })
 })
-function add(id){
 
-    let qtd = parseInt(document.getElementById(`qtd-${id}`).value)
-    let produto = produtos.find(p => p.id === id)
-    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || []
+function add(id) {
 
-    // Adiciona item
-    carrinho.push({
-        id: produto.id,
-        nome: produto.nome,
-        qtd: qtd,
-        preco: produto.preco
-    })
+    // 1. Validação simples da quantidade
+    let inputQtd = document.getElementById(`qtd-${id}`);
+    let qtd = parseInt(inputQtd.value);
+    if(!qtd || qtd < 1){
 
-    localStorage.setItem('carrinho', JSON.stringify(carrinho))
-    alert("Produto adicionado ao carrinho!")
-}
+        alert("Por favor, selecione uma quantidade válida.");
+        return;
+    }
 
-btnLogout.addEventListener('click', () =>{
+    // 2. Encontrar o produto na lista global (Correção do ID)
+    // Note que usamos 'p.codProduto' para bater com o ID que veio do HTML
+    let produto = produtoAll.find(p => p.codProduto === id);
+    if(!produto){
+
+        alert("Erro ao encontrar o produto.");
+        console.error("Produto não encontrado no array produtos:", id);
+        return;
+    }
+
+    // 3. Obter carrinho atual ou criar um vazio
+    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+    // 4. Lógica Inteligente: Verificar se já existe no carrinho
+    // O findIndex retorna a posição do item ou -1 se não achar
+    const index = carrinho.findIndex(item => item.id === id);
+
+    if(index !== -1){
+
+        // SE JÁ EXISTE: Apenas soma a quantidade
+        carrinho[index].qtd += qtd;
+        console.log(`Quantidade atualizada para o produto ${produto.nome}`);
+    }else{
+
+        // SE NÃO EXISTE: Adiciona o novo objeto
+        carrinho.push({
+            id: produto.codProduto,
+            nome: produto.nome,
+            qtd: qtd,
+            preco: produto.preco,
+            imagem: produto.imagem_url // Dica: Salve a imagem para mostrar no carrinho depois
+        });
+    }
+
+    // 5. Salvar e Feedback
+    localStorage.setItem('carrinho', JSON.stringify(carrinho));
+    alert(`${qtd} unidade(s) de "${produto.nome}" adicionada(s) ao carrinho!`);
     
-    sessionStorage.clear()
-    location.href = '../index.html' 
-})
+    // Opcional: Reseta o input para 1
+    inputQtd.value = "1"; 
+}
 

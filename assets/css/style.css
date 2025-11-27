@@ -56,6 +56,16 @@ body{
     margin:0;
 }figure{
     margin:5px;
+}table{
+    margin: 0 auto;
+    position: relative;
+    top: 10px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    color: white;
+    border: solid 1px white;
+    background-color: rgb(59, 77, 61);
 }
 
 /* --------------------------- STYLE IDS --------------------------- */
@@ -78,21 +88,26 @@ body{
 }#info{
     width:90vw;
     text-align: center;
-}#btn, #btnLogout{
-    width:70px;
+}#btn, #btnLogout, #btnClear{
+    min-width:70px;
     height:30px;
     margin-bottom: 10px;
-    background-color: rgb(159, 194, 166);
+    background-color: rgb(28, 83, 38);
+    color:white;
     border: solid 1px black;
     border-radius: 3px;
     transition: 0.3s;
 }#btn:hover{
-    background-color: black;
-    color:white;
+    background-color: white;
+    color:black;
     cursor: pointer;
 }#btnLogout:hover{
-    background-color: black;
-    color:white;
+    background-color: white;
+    color:black;
+    cursor: pointer;
+}#btnClear:hover{
+    background-color: white;
+    color:black;
     cursor: pointer;
 }#res{
     width:300px;
@@ -109,9 +124,11 @@ body{
     margin: 20px 0 0 20px;
 }#produtos{
     width:100%;
-    min-height:910px
+    min-height:100px;
 }#btnLogout{
     margin-top:7px;
+}#subtitle{
+    margin:10px 0 10px 0;
 }
 
 /* --------------------------- STYLE FONTES --------------------------- */
