@@ -4,8 +4,6 @@ const btn = document.getElementById('btn')
 
 let resProdutos = document.getElementById('produtos')
 
-
-
 btnLogout.addEventListener('click', () =>{
     
     sessionStorage.clear()
@@ -49,10 +47,11 @@ window.addEventListener('DOMContentLoaded', () =>{
 function gerarTabela(dados){
 
     // Busca o carrinho do sessionStorage
-    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || []
     if (carrinho.length === 0) {
 
-        return '<tbody><tr><td colspan="5">Seu carrinho está vazio.</td></tr></tbody>';
+        btn.style.display = 'none'
+        return '<tbody><tr><td colspan="5">Seu carrinho está vazio.</td></tr></tbody>'
     }
 
     let tabela = ''
@@ -74,7 +73,7 @@ function gerarTabela(dados){
     carrinho.forEach(item => {
 
         // Calculamos o total daquele item (Preço * Qtd)
-        let subtotal = item.preco * item.qtd;
+        let subtotal = item.preco * item.qtd
         tabela += 
         `
         <tr>
@@ -86,6 +85,45 @@ function gerarTabela(dados){
         `;
     });
     
-    tabela += '</tbody>';
-    return tabela;
+    tabela += '</tbody>'
+    return tabela
 }
+
+btn.addEventListener('click', (e) =>{
+    e.preventDefault()
+
+    const nomeUsuario = sessionStorage.getItem('nome')  
+    const nomeProduto = localStorage.getItem('nome')
+    const carrinho = JSON.parse(localStorage.getItem('carrinho')) || []
+    
+    let totalCarrinho = 0;
+    carrinho.forEach(item => {
+        
+        totalCarrinho += parseFloat(item.preco) * parseInt(item.qtd)
+    })
+
+    const valores = {}
+    
+    const token = sessionStorage.getItem('token')
+    fetch(`http://localhost:3000/pedido`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(valores)
+    })
+    .then(resp = resp.json())
+    .then(dados =>{
+
+        localStorage.clear()
+        console.log(dados)
+        resProdutos.innerHTML = ''
+        resProdutos.innerHTML += dados.message
+
+        setTimeout(() => {
+                
+            location.reload()
+        }, 1000)
+    })
+})

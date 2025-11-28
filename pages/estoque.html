@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/css/style.css">
-    <script src="../assets/js/progProdutoApagar.js" defer></script>
+    <script src="../assets/js/progEstoque.js" defer></script>
     <title>Sistema de E-commerce</title>
 </head>
 <body>
-
     <header>
 
         <br>
@@ -22,13 +21,12 @@
             <a href="./produtoCadastrar.html" class="navigationLink stack-sans-text-a">Cadastrar</a>
             <a href="./produtoAtualizar.html" class="navigationLink stack-sans-text-a">Atualizar</a>
             <a href="./produtoApagar.html" class="navigationLink stack-sans-text-a">Apagar</a>
-            <a href="./produto.html" class="navigationLink stack-sans-text-a">Ver Produtos</a>
 
         </nav>
 
     </header>
     <main>
-        
+
         <section id="sidebar">
 
             <a href="./produto.html" class="tab">Produtos</a>
@@ -38,33 +36,42 @@
         </section>
         <section id="info">
 
-            <h2 class="stack-sans-text-h2" id="subtitle">Apagar Produto</h2>
+            <div id="userInfo">
+
+                <h3 class="stack-sans-text-h3">Olá, <span id="resNomeUser"></span></h3>
+                <br>
+                <p class="stack-sans-text-textBlack">Tipo de cadastro: <span id="resTipo"></span></p>
+                
+            </div>
+            <br>
+
+            <h2 class="stack-sans-text-h2" id="subtitle">Estoque de Produtos</h2>
             <br>
 
             <form>
 
+                <label for="idProduto" class="stack-sans-text-textWhite">Código do produto: </label>
                 <br>
-
-                <label for="codProduto" class="stack-sans-text-textWhite">Código do produto: </label>
-                <br>
-                <input type="number" id="codProduto">
+                <input type="number" id="idProduto">
 
                 <br>
                 <br>
+
+                <label for="idProduto" class="stack-sans-text-textWhite">Código do produto: </label>
+                <br>
+                <input type="number" id="idProduto">
+
+                <br>
+                <br>
+
                 
-                <button type="submit" id="btn">Apagar</button>
-
             </form>
-
-            <div id="res"></div>
         </section>
 
     </main>
     <footer>
 
 
-
     </footer>
-    
 </body>
 </html>

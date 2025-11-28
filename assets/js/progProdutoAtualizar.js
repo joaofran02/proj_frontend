@@ -12,8 +12,6 @@ btn.addEventListener('click', (e) =>{
     let imagem_url = document.getElementById('imagem_url').value
     let ativo = document.getElementById('ativo').value
 
-
-
     const valores = {}
 
     if (nome !== "") valores.nome = nome
