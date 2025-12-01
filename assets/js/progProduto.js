@@ -26,20 +26,22 @@ window.addEventListener('DOMContentLoaded', () =>{
 
         resProdutos.innerHTML = ''
         dados.forEach(dad =>{
-            
-            resProdutos.innerHTML += 
+
+            const quantidadeEstoque = dad.estoqueProduto ? dad.estoqueProduto.quantidade : 0
+
+            resProdutos.innerHTML +=
             `
             <article class="produto">
 
                 <figure>
 
                     <img src="${dad.imagem_url}">
-                    <p class="stack-sans-text-textWhite">Código de produto: ${dad.codProduto}<br>Nome: ${dad.nome}<br>Descrição: ${dad.descricao}<br>Modelo: ${dad.modelo}<br>Preço: ${dad.preco}<br>Está ativo: ${dad.ativo}</p>
+                    <p class="stack-sans-text-textWhite">Código de produto: ${dad.codProduto}<br>Nome: ${dad.nome}<br>Descrição: ${dad.descricao}<br>Modelo: ${dad.modelo}<br>Preço: ${dad.preco}<br>Quantidade em estoque: ${quantidadeEstoque}<br>Está ativo: ${dad.ativo}</p>
 
                 </figure>
             </article>
             `
-            
+
         })
     })
 })

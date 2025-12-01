@@ -45,27 +45,43 @@
             </div>
             <br>
 
-            <h2 class="stack-sans-text-h2" id="subtitle">Estoque de Produtos</h2>
+            <h2 class="stack-sans-text-h2" id="subtitle">Movimentar Estoque</h2>
             <br>
 
             <form>
 
-                <label for="idProduto" class="stack-sans-text-textWhite">Código do produto: </label>
+                <label for="idProduto" class="stack-sans-text-textWhite">Código do produto a ser movimentado: </label>
                 <br>
                 <input type="number" id="idProduto">
 
                 <br>
                 <br>
 
-                <label for="idProduto" class="stack-sans-text-textWhite">Código do produto: </label>
+                <label for="movimentacao" class="stack-sans-text-textWhite">Quantidade a movimentar: </label>
                 <br>
-                <input type="number" id="idProduto">
+                <input type="number" id="movimentacao">
 
                 <br>
                 <br>
 
-                
+                <label for="tipo" class="stack-sans-text-textWhite">Tipo de movimentação: </label>
+                <br>
+                <select id="tipo">
+
+                    <option value="none" selected disabled>Escolha uma das opções...</option>
+                    <option value="ENTRADA">ENTRADA</option>
+                    <option value="SAIDA">SAÍDA</option>
+
+                </select>
+
+                <br>
+                <br>
+
+                <button type="submit" id="btn">Atualizar Estoque</button>
+
             </form>
+
+            <div id="res"></div>
         </section>
 
     </main>

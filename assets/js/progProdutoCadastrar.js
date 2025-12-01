@@ -36,7 +36,7 @@ btn.addEventListener('click', (e) =>{
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
-        },  
+        },
         body: JSON.stringify(valores)
     })
     .then(resp => resp.json())
@@ -44,8 +44,9 @@ btn.addEventListener('click', (e) =>{
 
         console.log(dados)
         res.innerHTML = ''
-        res.innerHTML += dados.message
+        res.innerHTML += dados.message + ' e automaticamente cadastrado no estoque.'
         res.style.textAlign = 'center'
+        res.style.color = 'green'
     })
     .catch((err) =>{
 
