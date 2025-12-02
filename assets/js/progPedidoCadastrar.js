@@ -92,18 +92,25 @@ function gerarTabela(dados){
 btn.addEventListener('click', (e) =>{
     e.preventDefault()
 
-    const nomeUsuario = sessionStorage.getItem('nome')  
-    const nomeProduto = localStorage.getItem('nome')
     const carrinho = JSON.parse(localStorage.getItem('carrinho')) || []
-    
-    let totalCarrinho = 0;
-    carrinho.forEach(item => {
-        
-        totalCarrinho += parseFloat(item.preco) * parseInt(item.qtd)
-    })
 
-    const valores = {}
-    
+    if(carrinho.length === 0){
+
+        resProdutos.innerHTML = 'Carrinho vazio. Adicione produtos antes de realizar o pedido.'
+        resProdutos.style.color = 'red'
+        return
+    }
+
+    // Preparar itens para o backend
+    const itens = carrinho
+        .filter(item => item.id && item.qtd > 0)
+        .map(item => ({
+            idProduto: item.id,
+            quantidade: item.qtd
+        }))
+
+    const valores = { itens }
+
     const token = sessionStorage.getItem('token')
     fetch(`http://localhost:3000/pedido`, {
         method: 'POST',
@@ -113,17 +120,29 @@ btn.addEventListener('click', (e) =>{
         },
         body: JSON.stringify(valores)
     })
-    .then(resp = resp.json())
+    .then(resp => resp.json())
     .then(dados =>{
 
-        localStorage.clear()
-        console.log(dados)
-        resProdutos.innerHTML = ''
-        resProdutos.innerHTML += dados.message
+        if(dados.error){
 
-        setTimeout(() => {
-                
-            location.reload()
-        }, 1000)
+            resProdutos.innerHTML = 'Erro: ' + dados.error
+            resProdutos.style.color = 'red'
+        }else{
+
+            localStorage.removeItem('carrinho')
+            console.log(dados)
+            resProdutos.innerHTML = dados.message
+            resProdutos.style.color = 'green'
+
+            setTimeout(() => {
+
+                location.reload()
+            }, 1500)
+        }
+    })
+    .catch(err => {
+        console.error('Erro ao realizar pedido:', err)
+        resProdutos.innerHTML = 'Erro ao conectar com o servidor.'
+        resProdutos.style.color = 'red'
     })
 })
