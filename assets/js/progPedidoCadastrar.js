@@ -141,6 +141,7 @@ btn.addEventListener('click', (e) =>{
         }
     })
     .catch(err => {
+        
         console.error('Erro ao realizar pedido:', err)
         resProdutos.innerHTML = 'Erro ao conectar com o servidor.'
         resProdutos.style.color = 'red'

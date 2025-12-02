@@ -25,9 +25,11 @@ btnBuscarCep.addEventListener('click', () =>{
 
     const cep = document.getElementById('cep').value.replace(/\D/g, '')
 
-    if (cep.length !== 8) {
+    if(cep.length !== 8){
+
         res.innerHTML = 'CEP deve ter 8 dígitos'
         res.style.color = 'red'
+        res.style.textAlign = 'center'
         return
     }
 
@@ -35,9 +37,11 @@ btnBuscarCep.addEventListener('click', () =>{
     .then(resp => resp.json())
     .then(data => {
 
-        if (data.erro) {
+        if(data.erro){
+
             res.innerHTML = 'CEP não encontrado'
             res.style.color = 'red'
+            res.style.textAlign = 'center'
             return
         }
 
@@ -50,9 +54,11 @@ btnBuscarCep.addEventListener('click', () =>{
         res.style.color = 'green'
     })
     .catch(err => {
+
         console.error('Erro ao buscar CEP:', err)
         res.innerHTML = 'Erro ao buscar CEP'
         res.style.color = 'red'
+        res.style.textAlign = 'center'
     })
 })
 
@@ -66,8 +72,10 @@ btn.addEventListener('click', (e) =>{
     const is_principal = document.getElementById('is_principal').checked
 
     if (!cep || !numero) {
+
         res.innerHTML = 'CEP e número são obrigatórios'
         res.style.color = 'red'
+        res.style.textAlign = 'center'
         return
     }
 
@@ -92,9 +100,13 @@ btn.addEventListener('click', (e) =>{
     .then(data => {
 
         if (data.error) {
+
             res.innerHTML = 'Erro: ' + data.error
             res.style.color = 'red'
-        } else {
+            res.style.textAlign = 'center'
+
+        }else{
+
             res.innerHTML = data.message
             res.style.color = 'green'
 
@@ -110,9 +122,11 @@ btn.addEventListener('click', (e) =>{
             document.getElementById('is_principal').checked = false
         }
     })
-    .catch(err => {
+    .catch(err => { 
+
         console.error('Erro ao cadastrar endereço:', err)
         res.innerHTML = 'Erro ao conectar com o servidor'
         res.style.color = 'red'
+        res.style.textAlign = 'center'
     })
 })

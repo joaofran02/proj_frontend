@@ -51,15 +51,8 @@ btn.addEventListener('click', (e) =>{
         console.log(dados)
         res.innerHTML = ''
         res.innerHTML += dados.message
-        if(dados.status === 200){
-
-            res.style.textAlign = 'center'
-            res.style.color = 'green'
-        }else{
-
-            res.style.color = 'red'
-            res.style.textAlign = 'center'
-        }
+        res.style.textAlign = 'center'
+        
     })
     .catch((err) =>{
 
