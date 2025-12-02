@@ -44,14 +44,15 @@ btnBuscarCep.addEventListener('click', () =>{
             res.style.textAlign = 'center'
             return
         }
-
+        
         document.getElementById('logradouro').value = data.logradouro
         document.getElementById('bairro').value = data.bairro
         document.getElementById('localidade').value = data.localidade
         document.getElementById('uf').value = data.uf
-
+        
         res.innerHTML = 'Dados preenchidos automaticamente'
         res.style.color = 'green'
+        res.style.textAlign = 'center'
     })
     .catch(err => {
 

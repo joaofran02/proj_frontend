@@ -114,7 +114,7 @@ body{
     color:black;
     cursor: pointer;
 }#res{
-    width:300px;
+    min-width:300px;
     height:200px;
     margin: 0 auto;
     position: relative;
