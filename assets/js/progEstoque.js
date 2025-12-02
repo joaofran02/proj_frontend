@@ -12,8 +12,6 @@ window.addEventListener('DOMContentLoaded', () =>{
 
     resNomeUser.innerHTML = nomeUser
     resTipo.innerHTML = tipo
-
-
 })
 
 btn.addEventListener('click', (e) =>{
@@ -21,7 +19,7 @@ btn.addEventListener('click', (e) =>{
 
     let idProduto = document.getElementById('idProduto').value
     let movimentacao = document.getElementById('movimentacao').value
-    let tipo = document.getElementById('ativo').value
+    let tipo = document.getElementById('tipo').value
 
     if(!idProduto || !movimentacao || !tipo){
 
@@ -53,8 +51,15 @@ btn.addEventListener('click', (e) =>{
         console.log(dados)
         res.innerHTML = ''
         res.innerHTML += dados.message
-        res.style.textAlign = 'center'
-        res.style.color = 'green'
+        if(dados.status === 200){
+
+            res.style.textAlign = 'center'
+            res.style.color = 'green'
+        }else{
+
+            res.style.color = 'red'
+            res.style.textAlign = 'center'
+        }
     })
     .catch((err) =>{
 
