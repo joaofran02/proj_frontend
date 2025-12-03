@@ -20,7 +20,7 @@ btn.addEventListener('click', (e) =>{
     const codEndereco = document.getElementById('codEndereco').value
 
     const token = sessionStorage.getItem('token')
-    fetch(`http://localhost:3000/endereco/${codEndereco}`, {
+    fetch(`https://projbackend-production.up.railway.app/endereco/${codEndereco}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',

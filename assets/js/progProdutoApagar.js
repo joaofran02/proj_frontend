@@ -14,7 +14,7 @@ btn.addEventListener('click', (e) =>{
     }
 
     const token = sessionStorage.getItem('token')
-    fetch(`http://localhost:3000/produto/${codProduto}`, {
+    fetch(`https://projbackend-production.up.railway.app/produto/${codProduto}`, {
         method: 'DELETE',
         headers: {
 

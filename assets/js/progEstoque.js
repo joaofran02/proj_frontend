@@ -37,7 +37,7 @@ btn.addEventListener('click', (e) =>{
     console.log(valores)
 
     const token = sessionStorage.getItem('token')
-    fetch(`http://localhost:3000/estoque/${idProduto}`, {
+    fetch(`https://projbackend-production.up.railway.app/estoque/${idProduto}`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',

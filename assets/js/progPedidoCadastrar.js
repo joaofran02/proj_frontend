@@ -28,7 +28,7 @@ window.addEventListener('DOMContentLoaded', () =>{
     resTipo.innerHTML = tipo
 
     const token = sessionStorage.getItem('token')
-    fetch(`http://localhost:3000/produto`, {
+    fetch(`https://projbackend-production.up.railway.app/pedido`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

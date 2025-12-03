@@ -20,7 +20,7 @@ btn.addEventListener('click', (e) => {
         senha: senha
     }
 
-    fetch(`http://localhost:3000/login`, {
+    fetch(`https://projbackend-production.up.railway.app/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

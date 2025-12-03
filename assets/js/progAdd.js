@@ -24,7 +24,7 @@ window.addEventListener('DOMContentLoaded', () =>{
 
     
     const token = sessionStorage.getItem('token')
-    fetch(`http://localhost:3000/produto`, {
+    fetch(`https://projbackend-production.up.railway.app/produto`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

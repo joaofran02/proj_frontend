@@ -61,7 +61,7 @@ btn.addEventListener('click', (e) =>{
     }else{
 
         console.log('Realizando PATCH')
-        fetch(`http://localhost:3000/produto/${codProduto}`, {
+        fetch(`https://projbackend-production.up.railway.app/produto/${codProduto}`, {
             method: 'PATCH',
             headers: {
 

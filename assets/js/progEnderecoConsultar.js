@@ -34,7 +34,7 @@ btn.addEventListener('click', (e) =>{
     }
 
     const token = sessionStorage.getItem('token')
-    fetch(`http://localhost:3000/endereco/${codEndereco}`, {
+    fetch(`https://projbackend-production.up.railway.app/endereco/${codEndereco}`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`
