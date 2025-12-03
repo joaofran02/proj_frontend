@@ -1,4 +1,5 @@
 const btn = document.getElementById('btn')
+const btnLogout = document.getElementById('btnLogout')
 let res = document.getElementById('res')
 
 btn.addEventListener('click', (e) =>{
@@ -7,9 +8,9 @@ btn.addEventListener('click', (e) =>{
     let nome = document.getElementById('nome').value
     let descricao = document.getElementById('descricao').value
     let modelo = document.getElementById('modelo').value
-    let preco = document.getElementById('preco').value
+    let preco = parseFloat(document.getElementById('preco').value)
     let imagem_url = document.getElementById('imagem_url').value
-    let ativo = document.getElementById('ativo').value
+    let ativo = document.getElementById('ativo').value === 'true'
 
     if(!nome || !modelo || !preco || !ativo){
 
@@ -43,6 +44,13 @@ btn.addEventListener('click', (e) =>{
     .then(dados =>{
 
         console.log(dados)
+        if(dados.error){
+
+            res.innerHTML = 'Erro: ' + dados.error
+            res.style.color = 'red'
+            res.style.textAlign = 'center'
+            return
+        }
         res.innerHTML = ''
         res.innerHTML += dados.message + ' e automaticamente cadastrado no estoque.'
         res.style.textAlign = 'center'
@@ -56,3 +64,9 @@ btn.addEventListener('click', (e) =>{
         res.style.textAlign = 'center'
     })
 })
+
+btnLogout.addEventListener('click', () =>{
+    
+    sessionStorage.clear()
+    location.href = '../index.html' 
+})  

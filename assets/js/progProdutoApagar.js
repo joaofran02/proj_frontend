@@ -1,4 +1,5 @@
 const btn = document.getElementById('btn')
+const btnLogout = document.getElementById('btnLogout')
 let res = document.getElementById('res')
 
 btn.addEventListener('click', (e) =>{
@@ -44,3 +45,9 @@ btn.addEventListener('click', (e) =>{
         res.style.textAlign = 'center'
     }) 
 })
+
+btnLogout.addEventListener('click', () =>{
+    
+    sessionStorage.clear()
+    location.href = '../index.html' 
+})  
