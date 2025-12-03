@@ -33,7 +33,7 @@ btn.addEventListener('click', (e) =>{
     if(nome && descricao && modelo && preco && imagem_url && ativo){
 
         console.log('Realizando PUT')
-        fetch(`http://localhost:3000/produto/${codProduto}`, {
+        fetch(`https://projbackend-production.up.railway.app/${codProduto}`, {
             method: 'PUT',
             headers: {
 
