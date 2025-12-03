@@ -22,7 +22,6 @@ window.addEventListener('DOMContentLoaded', () =>{
     resNomeUser.innerHTML = nomeUser
     resTipo.innerHTML = tipo
 
-    
     const token = sessionStorage.getItem('token')
     fetch(`https://projbackend-production.up.railway.app/produto`, {
         method: 'GET',
@@ -41,6 +40,11 @@ window.addEventListener('DOMContentLoaded', () =>{
             
             if(dad.ativo === true){
 
+                if(!dad.estoqueProduto.quantidade){
+
+                    return 
+                }
+
                 resProdutos.innerHTML += 
                 `
                 <article class="produto">
@@ -48,17 +52,17 @@ window.addEventListener('DOMContentLoaded', () =>{
                     <figure>
 
                         <img src="${dad.imagem_url}">
-                        <p class="stack-sans-text-textWhite">Nome: ${dad.nome}<br>Descrição: ${dad.descricao}<br>Modelo: ${dad.modelo}<br>Preço: ${dad.preco}<br></p>
+                        <p class="stack-sans-text-textWhite">Nome: ${dad.nome}<br>Descrição: ${dad.descricao}<br>Modelo: ${dad.modelo}<br>Preço: ${dad.preco}<br>Estoque: ${dad.estoqueProduto ? dad.estoqueProduto.quantidade : 0}<br></p>
 
                     </figure>
                     <div class="controle-produto">
 
-                        <input type="number" min="1" value="1" id="qtd-${dad.codProduto}">
+                        <input type="number" min="1" max="${dad.estoqueProduto ? dad.estoqueProduto.quantidade : 0}" value="1" id="qtd-${dad.codProduto}">
                         <button onclick="add(${dad.codProduto})">Adicionar</button>
 
                     </div>
                 </article>
-                `
+                    `
             }
         })
     })
@@ -85,6 +89,15 @@ function add(id) {
         return;
     }
 
+    const estoqueDisponivel = produto.estoqueProduto ? produto.estoqueProduto.quantidade : 0;
+
+    // 3. Verificar se a quantidade excede o estoque
+    if(qtd > estoqueDisponivel){
+
+        alert("Quantidade excede o estoque disponível.");
+        return;
+    }
+
     // 3. Obter carrinho atual ou criar um vazio
     let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
@@ -94,7 +107,14 @@ function add(id) {
 
     if(index !== -1){
 
-        // SE JÁ EXISTE: Apenas soma a quantidade
+        // SE JÁ EXISTE: Verificar se a soma excede o estoque
+        if(carrinho[index].qtd + qtd > estoqueDisponivel){
+
+            alert("Quantidade total no carrinho excede o estoque disponível.");
+            return;
+        }
+
+        // Apenas soma a quantidade
         carrinho[index].qtd += qtd;
         console.log(`Quantidade atualizada para o produto ${produto.nome}`);
     }else{

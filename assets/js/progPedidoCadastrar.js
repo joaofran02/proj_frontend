@@ -27,24 +27,11 @@ window.addEventListener('DOMContentLoaded', () =>{
     resNomeUser.innerHTML = nomeUser
     resTipo.innerHTML = tipo
 
-    const token = sessionStorage.getItem('token')
-    fetch(`https://projbackend-production.up.railway.app/pedido`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-        }
-    })
-    .then(resp => resp.json())
-    .then(dados =>{
-
-        resProdutos.innerHTML = ''
-        resProdutos.innerHTML = `<table cellpadding="8" border="1">${gerarTabela(dados)}</table>`
-        resProdutos.style.textAlign = 'center'
-    })
+    resProdutos.innerHTML = `<table cellpadding="8" border="1">${gerarTabela()}</table>`
+    resProdutos.style.textAlign = 'center'
 })
 
-function gerarTabela(dados){
+function gerarTabela(){
 
     // Busca o carrinho do sessionStorage
     let carrinho = JSON.parse(localStorage.getItem('carrinho')) || []
@@ -112,7 +99,7 @@ btn.addEventListener('click', (e) =>{
     const valores = { itens }
 
     const token = sessionStorage.getItem('token')
-    fetch(`http://localhost:3000/pedido`, {
+    fetch(`https://projbackend-production.up.railway.app/pedido`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

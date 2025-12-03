@@ -44,8 +44,8 @@ btn.addEventListener('click', (e) => {
         }
 
         console.log(dados)
-        console.log('Nome:', dados.usuario.nome)
-        console.log('Tipo:', dados.usuario.tipo)
+        console.log('Nome:', dados.nome)
+        console.log('Tipo:', dados.tipo)
 
         if(!dados.token){
 
