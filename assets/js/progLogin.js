@@ -83,6 +83,10 @@ btn.addEventListener('click', (e) => {
         res.innerHTML = `Erro ao realizar login.`
         res.style.color = 'red'
         res.style.textAlign = 'center'
+        setTimeout(() => {
+
+            res.innerHTML = ''
+        }, 1500)
     })
 })
 

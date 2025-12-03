@@ -129,5 +129,9 @@ btn.addEventListener('click', (e) =>{
         res.innerHTML = 'Erro ao conectar com o servidor'
         res.style.color = 'red'
         res.style.textAlign = 'center'
+        setTimeout(() => {
+
+            res.innerHTML = ''
+        }, 1500)
     })
 })

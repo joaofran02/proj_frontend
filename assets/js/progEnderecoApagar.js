@@ -48,5 +48,9 @@ btn.addEventListener('click', (e) =>{
         console.error('Erro ao realizar pedido:', err)
         res.innerHTML = 'Erro ao conectar com o servidor.'
         res.style.color = 'red'
+        setTimeout(() => {
+
+            res.innerHTML = ''
+        }, 1500)
     })
 })

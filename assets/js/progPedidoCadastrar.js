@@ -38,6 +38,7 @@ function gerarTabela(){
     if (carrinho.length === 0) {
 
         btn.style.display = 'none'
+        btnClear.style.display = 'none'
         return '<tbody><tr><td colspan="5">Seu carrinho está vazio.</td></tr></tbody>'
     }
 
@@ -114,6 +115,10 @@ btn.addEventListener('click', (e) =>{
 
             resProdutos.innerHTML = 'Erro: ' + dados.error
             resProdutos.style.color = 'red'
+            setTimeout(() => {
+                
+                resProdutos.innerHTML = ''
+            }, 1500)
         }else{
 
             localStorage.removeItem('carrinho')

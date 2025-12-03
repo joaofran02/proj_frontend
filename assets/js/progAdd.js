@@ -66,6 +66,17 @@ window.addEventListener('DOMContentLoaded', () =>{
             }
         })
     })
+    .catch((err) =>{
+
+        console.error('Erro ao adicionar ao carrinho:', err)
+        res.innerHTML = 'Erro ao adicionar ao carrinho.'
+        res.style.color = 'red'
+        res.style.textAlign = 'center'
+        setTimeout(() => {
+
+            res.innerHTML = ''
+        }, 1500)
+    })
 })
 
 function add(id) {

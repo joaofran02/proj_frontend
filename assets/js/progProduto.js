@@ -43,6 +43,12 @@ window.addEventListener('DOMContentLoaded', () =>{
             `
 
         })
+        .catch((err) =>{
+
+            console.error('Erro ao listar produtos:', err)
+            resProdutos.innerHTML = 'Erro ao listar produtos.'
+            resProdutos.style.color = 'red'
+        })
     })
 })
 
